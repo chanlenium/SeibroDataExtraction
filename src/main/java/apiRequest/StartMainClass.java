@@ -14,28 +14,28 @@ public class StartMainClass {
 
     public static void main(String[] args) throws IOException {
         utils.SSLTrust.sslTrustAllCerts();    // 보안정책 우회
-        String martTpcd = "11"; // 시장구분코드
+        String martTpcd = "50"; // 시장구분코드
         ArrayList<GeneralCompanyModel> companies = new ArrayList<GeneralCompanyModel>();
         ArrayList<BondCompanyModel> bondCompanies = new ArrayList<BondCompanyModel>();
         ArrayList<CpCompanyModel> cpCompanies = new ArrayList<CpCompanyModel>();
 
-        GetShotnByMart shortByMart = new GetShotnByMart();
-        shortByMart.getShotnByMart(martTpcd, companies);
+        StockSvc stockSvcObj = new StockSvc();
+        stockSvcObj.getShotnByMart(martTpcd, companies);
 
         System.out.println("companies : " + companies.size());
         for(GeneralCompanyModel company : companies) {
             // 발행인별 채권발행내역 조회
-            GetIssurBondIssuDetailsInfo issurBondIssuDetailsInfoObj = new GetIssurBondIssuDetailsInfo();
-            ArrayList<BondCompanyModel> bondCompany = issurBondIssuDetailsInfoObj.getIssurBondIssuDetailsInfo(company);
+            BondSvc bondSvcObj = new BondSvc();
+            ArrayList<BondCompanyModel> bondCompany = bondSvcObj.getIssurBondIssuDetailsInfo(company);
             for(int j = 0; j < bondCompany.size(); j++) {
                 bondCompanies.add(bondCompany.get(j));
             }
 
 
             // 발행인별 단기금융상품(CP)발행내역 조회
-            GetSTBInfo sTBInfoObj = new GetSTBInfo();
-            ArrayList<CpCompanyModel> cpCompany = sTBInfoObj.getSTBInfo(company);
-            System.out.println("cpCompany.size() : " + cpCompany.size());
+            ShortmSvc shortmSvcObj = new ShortmSvc();
+            ArrayList<CpCompanyModel> cpCompany = shortmSvcObj.getSTBInfo(company);
+            //System.out.println("cpCompany.size() : " + cpCompany.size());
             for(int j = 0; j < cpCompany.size(); j++) {
                 cpCompanies.add(cpCompany.get(j));
             }

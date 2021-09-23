@@ -8,8 +8,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class SSLTrust {
-	// 보안정책을 우회하여 접속하기 위한 함수
-    public static void sslTrustAllCerts(){ 
+    public static void sslTrustAllCerts(){
         TrustManager[] trustAllCerts = new TrustManager[] { 
             new X509TrustManager() { 
                 public X509Certificate[] getAcceptedIssuers() { 

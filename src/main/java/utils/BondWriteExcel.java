@@ -31,9 +31,9 @@ public class BondWriteExcel implements Write {
         ArrayList<BondCompanyModel> bondCompanies = (ArrayList<BondCompanyModel>) companies;
 
         try {
-            if(new File("./resultdata.xlsx").exists()){
+            if(new File("./bondResultData.xlsx").exists()){
                 System.out.println("file exist.");
-                File file = new File("./resultdata.xlsx");
+                File file = new File("./bondResultData.xlsx");
                 fis = new FileInputStream(file);
                 xssfSheet = xssfWb.createSheet(sheetName);
                 writeRow(xssfSheet, bondCompanies);
@@ -44,10 +44,7 @@ public class BondWriteExcel implements Write {
                 xssfSheet = xssfWb.createSheet(sheetName);
                 makeBondHeader(xssfSheet);
                 writeRow(xssfSheet, bondCompanies);
-                fos = new FileOutputStream("./resultdata.xlsx");
-//                xssfWb.write(fos);
-//                fos.flush();
-//                fos.close();
+                fos = new FileOutputStream("./bondResultData.xlsx");
             }
             xssfWb.write(fos);
             fos.flush();
@@ -116,7 +113,7 @@ public class BondWriteExcel implements Write {
 
     private void writeRow(XSSFSheet xssfSheet, ArrayList<BondCompanyModel> bondCompanies) {
         for (int rowIndex = 0; rowIndex < bondCompanies.size(); rowIndex++) {
-            xssfRow = xssfSheet.createRow(rowIndex++);
+            xssfRow = xssfSheet.createRow(rowIndex+1);
 
             /** 기업일반정보 */
             xssfCell = xssfRow.createCell(0);

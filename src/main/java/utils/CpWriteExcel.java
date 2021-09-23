@@ -31,9 +31,9 @@ public class CpWriteExcel implements Write {
         ArrayList<CpCompanyModel> cpCompanies = (ArrayList<CpCompanyModel>) companies;
 
         try {
-            if(new File("./resultdata.xlsx").exists()){
+            if(new File("./cpResultData.xlsx").exists()){
                 System.out.println("file exist.");
-                File file = new File("./resultdata.xlsx");
+                File file = new File("./cpResultData.xlsx");
                 fis = new FileInputStream(file);
                 xssfSheet = xssfWb.createSheet(sheetName);
                 writeRow(xssfSheet, cpCompanies);
@@ -44,7 +44,7 @@ public class CpWriteExcel implements Write {
                 xssfSheet = xssfWb.createSheet(sheetName);
                 makeBondHeader(xssfSheet);
                 writeRow(xssfSheet, cpCompanies);
-                fos = new FileOutputStream("./resultdata.xlsx");
+                fos = new FileOutputStream("./cpResultData.xlsx");
             }
             xssfWb.write(fos);
             fos.flush();
@@ -111,7 +111,7 @@ public class CpWriteExcel implements Write {
 
     private void writeRow(XSSFSheet xssfSheet, ArrayList<CpCompanyModel> cpCompanies) {
         for (int rowIndex = 0; rowIndex < cpCompanies.size(); rowIndex++) {
-            xssfRow = xssfSheet.createRow(rowIndex++);
+            xssfRow = xssfSheet.createRow(rowIndex+1);
 
             /** 기업일반정보 */
             xssfCell = xssfRow.createCell(0);
